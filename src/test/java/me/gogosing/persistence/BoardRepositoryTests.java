@@ -6,25 +6,20 @@ import static org.assertj.core.api.Assertions.assertWith;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import me.gogosing.config.QueryDslSupportTestConfiguration;
 import me.gogosing.persistence.dto.BoardCondition;
 import me.gogosing.persistence.entity.BoardEntity;
 import me.gogosing.persistence.repository.BoardRepository;
+import me.gogosing.support.QueryDslRepositoryTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@DataJpaTest
-@AutoConfigureTestDatabase
 @ExtendWith(SpringExtension.class)
-@Import(QueryDslSupportTestConfiguration.class)
+@QueryDslRepositoryTest
 @DisplayName("BoardRepository Tests")
 public class BoardRepositoryTests {
 
