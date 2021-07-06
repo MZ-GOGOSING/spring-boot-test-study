@@ -59,7 +59,7 @@ public class BoardController {
 		return ApiResponseGenerator.success(boardService.getBoard(boardId));
 	}
 
-	@ApiOperation("특정 게시물 저장")
+	@ApiOperation("특정 게시물 생성")
 	@PostMapping
 	public ApiResponse<BoardDto> postBoard(final @RequestBody @Valid BoardSource source) {
 		return ApiResponseGenerator.success(boardService.insertBoard(source));
