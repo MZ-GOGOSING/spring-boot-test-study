@@ -1,3 +1,8 @@
+server:
+  servlet:
+    encoding:
+      force-response: true
+
 spring:
   jpa:
     hibernate:

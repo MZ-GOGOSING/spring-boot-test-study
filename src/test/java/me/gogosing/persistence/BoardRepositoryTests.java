@@ -16,6 +16,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
@@ -102,7 +103,7 @@ public class BoardRepositoryTests {
 			.build();
 
 		final var pageable = PageRequest
-			.of(0, 10, Sort.by("boardId").descending());
+			.of(0, 10, Sort.by(Order.asc("boardId")));
 
 		// when
 		final var paginatedResult = boardRepository.findAllByCondition(condition, pageable);

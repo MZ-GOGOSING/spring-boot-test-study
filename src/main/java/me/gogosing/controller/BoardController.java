@@ -61,13 +61,13 @@ public class BoardController {
 
 	@ApiOperation("특정 게시물 저장")
 	@PostMapping
-	public ApiResponse<BoardDto> createBoard(final @RequestBody @Valid BoardSource source) {
+	public ApiResponse<BoardDto> postBoard(final @RequestBody @Valid BoardSource source) {
 		return ApiResponseGenerator.success(boardService.insertBoard(source));
 	}
 
 	@ApiOperation("특정 게시물 수정")
 	@PutMapping("/{boardId}")
-	public ApiResponse<BoardDto> modifyBoard(
+	public ApiResponse<BoardDto> putBoard(
 		final @PathVariable @Min(1) Long boardId,
 		final @RequestBody @Valid BoardSource source
 	) {
@@ -76,7 +76,7 @@ public class BoardController {
 
 	@ApiOperation("특정 게시물 삭제")
 	@DeleteMapping("/{boardId}")
-	public ApiResponse<BoardDto> removeBoard(final @PathVariable @Min(1) Long boardId) {
+	public ApiResponse<BoardDto> deleteBoard(final @PathVariable @Min(1) Long boardId) {
 		return ApiResponseGenerator.success(boardService.deleteBoard(boardId));
 	}
 }

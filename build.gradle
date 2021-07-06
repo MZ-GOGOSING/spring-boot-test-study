@@ -30,6 +30,10 @@ dependencies {
     implementation 'com.querydsl:querydsl-jpa'
     implementation 'com.querydsl:querydsl-apt'
 
+    compileOnly 'com.fasterxml.jackson.core:jackson-databind'
+    compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+    compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
     compileOnly 'org.flywaydb:flyway-core'
     compileOnly 'org.projectlombok:lombok'
     compileOnly 'net.logstash.logback:logstash-logback-encoder:6.1'
