@@ -15,7 +15,7 @@ import me.gogosing.persistence.dto.BoardDto;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class boardItem {
+public class BoardItem {
 
 	@EqualsAndHashCode.Include
 	private Long boardId;
@@ -28,7 +28,7 @@ public class boardItem {
 
 	@Builder
 	@SuppressWarnings("unused")
-	public boardItem(
+	public BoardItem(
 		Long boardId,
 		String boardTitle,
 		LocalDateTime createDate,
@@ -40,8 +40,8 @@ public class boardItem {
 		this.updateDate = updateDate;
 	}
 
-	public static boardItem of(final BoardDto boardDto) {
-		return boardItem.builder()
+	public static BoardItem of(final BoardDto boardDto) {
+		return BoardItem.builder()
 			.boardId(boardDto.getBoardId())
 			.boardTitle(boardDto.getBoardTitle())
 			.createDate(boardDto.getCreateDate())

@@ -7,8 +7,8 @@ import me.gogosing.persistence.dto.BoardCondition;
 import me.gogosing.persistence.dto.BoardDto;
 import me.gogosing.persistence.entity.BoardEntity;
 import me.gogosing.persistence.repository.BoardRepository;
+import me.gogosing.service.dto.BoardItem;
 import me.gogosing.service.dto.BoardSource;
-import me.gogosing.service.dto.boardItem;
 import me.gogosing.service.helper.BoardEntityGenerateComponent;
 import me.gogosing.support.exception.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -28,13 +28,13 @@ public class BoardService {
 	private final BoardRepository boardRepository;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public Page<boardItem> getPaginatedBoard(
+	public Page<BoardItem> getPaginatedBoard(
 		final BoardCondition condition,
 		final Pageable pageable
 	) {
 		return boardRepository
 			.findAllByCondition(condition, pageable)
-			.map(boardItem::of);
+			.map(BoardItem::of);
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -84,13 +84,13 @@ public class BoardService {
 		return BoardDto.withContentsAndAttachments(boardRepository.save(boardEntity));
 	}
 
-	public Long deleteBoard(final Long boardId) {
+	public BoardDto deleteBoard(final Long boardId) {
 		final var boardEntity = boardRepository
 			.findByBoardId(boardId)
 			.orElseThrow(() -> new EntityNotFoundException(String.format("[%d]는 존재하지 않거나, 삭제된 상태입니다.", boardId)));
 
 		boardRepository.delete(boardEntity);
-		
-		return boardId;
+
+		return BoardDto.withContentsAndAttachments(boardEntity);
 	}
 }

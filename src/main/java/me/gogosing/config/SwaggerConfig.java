@@ -72,8 +72,8 @@ public class SwaggerConfig {
 
   private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
-        .title("SANDBOX REST API 명세서")
-        .description("SANDBOX REST API 명세서입니다.")
+        .title("SAMPLE REST API 명세서")
+        .description("SAMPLE REST API 명세서입니다.")
         .termsOfServiceUrl("gogosing@mz.co.kr")
         .contact(new Contact("메가존", "https://mz.co.kr", "gogosing@mz.co.kr"))
         .version("1.0")
