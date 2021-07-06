@@ -1,0 +1,38 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        show-sql: true
+        order_inserts: true
+        order_updates: true
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:playground;MODE=MYSQL;
+    username: sa
+    password:
+
+  sql:
+    init:
+      platform: h2
+      mode: always
+
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.web.client: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.hibernate:
+      SQL: debug
+      tool.hbm2ddl: debug
+      type: trace
+      stat: debug
+      type.BasicTypeRegistry: warn

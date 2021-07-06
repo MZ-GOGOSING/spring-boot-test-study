@@ -8,14 +8,7 @@ plugins {
 
 group = 'me.gogosing'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-configurations {
-    querydsl.extendsFrom compileClasspath
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
+sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
@@ -30,15 +23,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.apache.commons:commons-lang3:3.7'
+    implementation 'org.hibernate:hibernate-spatial'
+    implementation 'org.hibernate:hibernate-envers'
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-apt'
 
-    compileOnly 'org.hibernate:hibernate-spatial'
-    compileOnly 'org.hibernate:hibernate-envers'
-    compileOnly 'com.querydsl:querydsl-jpa'
-    compileOnly 'com.querydsl:querydsl-apt'
     compileOnly 'org.flywaydb:flyway-core'
-
     compileOnly 'org.projectlombok:lombok'
-    compileOnly 'org.apache.commons:commons-lang3:3.7'
     compileOnly 'net.logstash.logback:logstash-logback-encoder:6.1'
 
     compileOnly 'io.springfox:springfox-swagger-ui:2.9.2'
@@ -50,9 +42,26 @@ dependencies {
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation ("org.springframework.boot:spring-boot-starter-test") {
+        exclude module: "junit-jupiter"
+    }
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
+    testImplementation "org.assertj:assertj-core:3.20.2"
+
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+    testRuntimeOnly "org.junit.platform:junit-platform-engine:1.6.2"
+    testRuntimeOnly "org.junit.platform:junit-platform-commons:1.6.2"
+    testRuntimeOnly 'io.springfox:springfox-swagger2:2.9.2'
     testRuntimeOnly 'com.h2database:h2'
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 ext {
@@ -84,6 +93,6 @@ idea {
     }
 }
 
-test {
+tasks.withType(Test) {
     useJUnitPlatform()
 }

@@ -1,5 +1,7 @@
 package me.gogosing.persistence.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,9 @@ import me.gogosing.support.dto.filter.FilterLocalDateRange;
  */
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class BoardCondition {
 
