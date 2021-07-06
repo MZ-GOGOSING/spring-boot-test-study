@@ -2,12 +2,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    show-sql: false
     open-in-view: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+        show_sql: false
         format_sql: true
-        show-sql: true
         order_inserts: true
         order_updates: true
 
@@ -31,7 +32,6 @@ logging:
     org.springframework.web.client: DEBUG
     org.springframework.jdbc: DEBUG
     org.hibernate:
-      SQL: debug
       tool.hbm2ddl: debug
       type: trace
       stat: debug

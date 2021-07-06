@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertWith;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import me.gogosing.QueryDslSupportTestConfiguration;
+import me.gogosing.config.QueryDslSupportTestConfiguration;
 import me.gogosing.persistence.dto.BoardCondition;
 import me.gogosing.persistence.entity.BoardEntity;
 import me.gogosing.persistence.repository.BoardRepository;
@@ -33,7 +33,7 @@ public class BoardRepositoryTests {
 
 	@Test
 	@DisplayName("BoardEntity 프로퍼티 존재 여부 확인")
-	public void testEntityProperties() {
+	public void testHasProperties() {
 		final var boardEntity = new BoardEntity();
 		assertThat(boardEntity)
 			.hasFieldOrProperty("boardId")
@@ -47,7 +47,7 @@ public class BoardRepositoryTests {
 
 	@Test
 	@DisplayName("BoardEntity 저장 동작 여부 확인")
-	public void testStoreEntity() {
+	public void testSave() {
 		// given
 		final var boardEntity = BoardEntity.builder()
 			.boardTitle("테스트 게시물 제목")

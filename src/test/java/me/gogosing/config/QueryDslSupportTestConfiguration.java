@@ -1,4 +1,4 @@
-package me.gogosing;
+package me.gogosing.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import javax.persistence.EntityManager;
