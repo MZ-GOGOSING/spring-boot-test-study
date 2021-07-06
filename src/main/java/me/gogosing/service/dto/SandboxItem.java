@@ -1,4 +1,4 @@
-package me.gogosing.persistence.dto;
+package me.gogosing.service.dto;
 
 import java.time.LocalDateTime;
 import lombok.Builder;
@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.gogosing.persistence.code.SandboxCategory;
+import me.gogosing.persistence.dto.SandboxDto;
 
 /**
  * 데이터 항목.
@@ -45,6 +46,7 @@ public class SandboxItem {
 
 
 	@Builder
+	@SuppressWarnings("unused")
 	public SandboxItem(
 		Long id,
 		String name,

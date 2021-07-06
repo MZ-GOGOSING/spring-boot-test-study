@@ -76,6 +76,7 @@ public class SandboxEntity {
 
 
 	@Builder
+	@SuppressWarnings("unused")
 	public SandboxEntity(
 		long id,
 		String name,

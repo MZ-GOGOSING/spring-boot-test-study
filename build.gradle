@@ -32,6 +32,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
     compileOnly 'org.hibernate:hibernate-spatial'
+    compileOnly 'org.hibernate:hibernate-envers'
     compileOnly 'com.querydsl:querydsl-jpa'
     compileOnly 'com.querydsl:querydsl-apt'
     compileOnly 'org.flywaydb:flyway-core'

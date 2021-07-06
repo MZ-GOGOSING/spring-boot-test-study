@@ -1,18 +1,15 @@
 package me.gogosing.persistence.repository;
 
-import static java.util.Collections.emptyList;
 import static me.gogosing.support.query.QueryDslHelper.optionalWhen;
-import static org.apache.commons.lang3.math.NumberUtils.LONG_ONE;
 
 import com.querydsl.jpa.JPQLQuery;
 import me.gogosing.persistence.CustomQuerydslRepositorySupport;
 import me.gogosing.persistence.dto.QSandboxDto;
 import me.gogosing.persistence.dto.SandboxDto;
-import me.gogosing.persistence.dto.SandboxFilter;
+import me.gogosing.persistence.dto.SandboxCondition;
 import me.gogosing.persistence.entity.QSandboxEntity;
 import me.gogosing.persistence.entity.SandboxEntity;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 @SuppressWarnings("unused")
@@ -25,15 +22,15 @@ public class SandboxRepositoryCustomImpl extends CustomQuerydslRepositorySupport
 	}
 
 	@Override
-	public Page<SandboxDto> getPaginatedSandbox(
-		final SandboxFilter filter,
+	public Page<SandboxDto> findAllByCondition(
+		final SandboxCondition condition,
 		final Pageable pageable
 	) {
 		final var query = getPaginationDefaultQuery();
 
-		applyPaginationWhereClause(query, filter);
+		applyPaginationWhereClause(query, condition);
 
-		return executePaginationFetchQuery(query, pageable);
+		return applyPagination(pageable, query);
 	}
 
 	private JPQLQuery<SandboxDto> getPaginationDefaultQuery() {
@@ -45,35 +42,19 @@ public class SandboxRepositoryCustomImpl extends CustomQuerydslRepositorySupport
 
 	private void applyPaginationWhereClause(
 		final JPQLQuery<SandboxDto> query,
-		final SandboxFilter filter
+		final SandboxCondition condition
 	) {
-		optionalWhen(filter.getName()).then(
+		optionalWhen(condition.getName()).then(
 			it -> query.where(SANDBOX_ENTITY.name.trim().containsIgnoreCase(it))
 		);
-		optionalWhen(filter.getAge()).then(
+		optionalWhen(condition.getAge()).then(
 			it -> query.where(
 				SANDBOX_ENTITY.age.goe(it.getMin()),
 				SANDBOX_ENTITY.age.loe(it.getMax())
 			)
 		);
-		optionalWhen(filter.getCategory()).then(
+		optionalWhen(condition.getCategory()).then(
 			it -> query.where(SANDBOX_ENTITY.category.eq(it))
 		);
-	}
-
-	private <T> Page<T> executePaginationFetchQuery(
-		final JPQLQuery<T> query,
-		final Pageable pageable
-	) {
-		final var totalCount = query.fetchCount();
-		if (totalCount < LONG_ONE) {
-			return new PageImpl<>(emptyList(), pageable, totalCount);
-		}
-
-		final var content = getQuerydsl()
-			.applyPagination(pageable, query)
-			.fetch();
-
-		return new PageImpl<>(content, pageable, totalCount);
 	}
 }

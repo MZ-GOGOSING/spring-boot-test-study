@@ -9,23 +9,6 @@ spring:
         xls: application/vnd.ms-excel
     log-request-details: true
 
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:playground;MODE=MYSQL;
-    username: sa
-    password:
-
-  flyway:
-    url: jdbc:h2:mem:playground
-    user: sa
-    password:
-    baseline-on-migrate: true
-
   jpa:
     open-in-view: false
     hibernate:
@@ -42,9 +25,26 @@ spring:
           fetch_size: 500
           batch_versioned_data: true
 
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:playground;MODE=MYSQL;
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  flyway:
+    url: jdbc:h2:mem:playground
+    user: sa
+    password:
+    baseline-on-migrate: true
+
 logging:
   config: classpath:logback.xml
   level:
-    web: debug
+    web: DEBUG
     org.springframework.orm.jpa: DEBUG
     org.springframework.transaction: DEBUG

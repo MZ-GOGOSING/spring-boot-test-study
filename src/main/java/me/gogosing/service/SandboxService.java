@@ -3,8 +3,8 @@ package me.gogosing.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.gogosing.persistence.dto.SandboxDto;
-import me.gogosing.persistence.dto.SandboxFilter;
-import me.gogosing.persistence.dto.SandboxItem;
+import me.gogosing.persistence.dto.SandboxCondition;
+import me.gogosing.service.dto.SandboxItem;
 import me.gogosing.persistence.repository.SandboxRepository;
 import me.gogosing.support.exception.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -23,11 +23,11 @@ public class SandboxService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Page<SandboxItem> getPaginatedSandbox(
-		final SandboxFilter filter,
+		final SandboxCondition condition,
 		final Pageable pageable
 	) {
 		return sandboxRepository
-			.getPaginatedSandbox(filter, pageable)
+			.findAllByCondition(condition, pageable)
 			.map(SandboxItem::of);
 	}
 

@@ -15,7 +15,7 @@ import me.gogosing.support.dto.filter.FilterNumericRange;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
-public class SandboxFilter {
+public class SandboxCondition {
 
 	/**
 	 * 이름.

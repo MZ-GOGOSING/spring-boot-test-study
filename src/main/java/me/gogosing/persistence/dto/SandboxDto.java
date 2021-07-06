@@ -54,6 +54,7 @@ public class SandboxDto {
 
 
 	@Builder
+	@SuppressWarnings("unused")
 	public SandboxDto(
 		Long id,
 		String name,

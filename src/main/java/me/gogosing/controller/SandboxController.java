@@ -6,8 +6,8 @@ import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.gogosing.persistence.dto.SandboxDto;
-import me.gogosing.persistence.dto.SandboxFilter;
-import me.gogosing.persistence.dto.SandboxItem;
+import me.gogosing.persistence.dto.SandboxCondition;
+import me.gogosing.service.dto.SandboxItem;
 import me.gogosing.service.SandboxService;
 import me.gogosing.support.dto.ApiResponse;
 import me.gogosing.support.dto.ApiResponseGenerator;
@@ -34,7 +34,7 @@ public class SandboxController {
 	@ApiOperation("페이징 처리된 목록 조회")
 	@GetMapping
 	public ApiResponse<PageResponse<SandboxItem>> getPaginatedItem(
-		final SandboxFilter filter,
+		final SandboxCondition condition,
 		final @PageableDefault(
 			size = 25,
 			sort = "name",
@@ -42,7 +42,7 @@ public class SandboxController {
 		) Pageable pageable
 	) {
 		final var paginatedResult = sandboxService
-			.getPaginatedSandbox(filter, pageable);
+			.getPaginatedSandbox(condition, pageable);
 
 		return ApiResponseGenerator.success(PageResponse.convert(paginatedResult));
 	}
