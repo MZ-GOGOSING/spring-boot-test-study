@@ -22,6 +22,8 @@ public class BoardItem {
 
 	private String boardTitle;
 
+	private Boolean boardUseYn;
+
 	private LocalDateTime createDate;
 
 	private LocalDateTime updateDate;
@@ -31,11 +33,13 @@ public class BoardItem {
 	public BoardItem(
 		Long boardId,
 		String boardTitle,
+		Boolean boardUseYn,
 		LocalDateTime createDate,
 		LocalDateTime updateDate
 	) {
 		this.boardId = boardId;
 		this.boardTitle = boardTitle;
+		this.boardUseYn = boardUseYn;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
 	}
@@ -44,6 +48,7 @@ public class BoardItem {
 		return BoardItem.builder()
 			.boardId(boardDto.getBoardId())
 			.boardTitle(boardDto.getBoardTitle())
+			.boardUseYn(boardDto.getBoardUseYn())
 			.createDate(boardDto.getCreateDate())
 			.updateDate(boardDto.getUpdateDate())
 			.build();

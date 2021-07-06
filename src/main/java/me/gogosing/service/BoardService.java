@@ -39,10 +39,7 @@ public class BoardService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public BoardDto getBoard(final Long boardId) {
-		final var storedEntity = boardRepository
-			.findByBoardId(boardId)
-			.filter(BoardEntity::isBoardUseYn)
-			.orElseThrow(() -> new EntityNotFoundException(String.format("[%d]는 존재하지 않거나, 삭제된 상태입니다.", boardId)));
+		final var storedEntity = getBoardEntityById(boardId);
 
 		return BoardDto.withContentsAndAttachments(storedEntity);
 	}
@@ -66,10 +63,7 @@ public class BoardService {
 		final Long boardId,
 		final BoardSource source
 	) {
-		final var boardEntity = boardRepository
-			.findByBoardId(boardId)
-			.orElseThrow(() -> new EntityNotFoundException(String.format("[%d]는 존재하지 않거나, 삭제된 상태입니다.", boardId)));
-
+		final var boardEntity = getBoardEntityById(boardId);
 		final var boardAttachmentEntities = boardEntityGenerateComponent
 			.buildBoardAttachmentEntities(boardEntity, source.getAttachments());
 
@@ -85,12 +79,16 @@ public class BoardService {
 	}
 
 	public BoardDto deleteBoard(final Long boardId) {
-		final var boardEntity = boardRepository
-			.findByBoardId(boardId)
-			.orElseThrow(() -> new EntityNotFoundException(String.format("[%d]는 존재하지 않거나, 삭제된 상태입니다.", boardId)));
+		final var boardEntity = getBoardEntityById(boardId);
 
 		boardRepository.delete(boardEntity);
 
 		return BoardDto.withContentsAndAttachments(boardEntity);
+	}
+
+	private BoardEntity getBoardEntityById(final Long boardId) {
+		return boardRepository
+			.findByBoardId(boardId)
+			.orElseThrow(() -> new EntityNotFoundException(String.format("[%d]는 존재하지 않거나, 삭제된 상태입니다.", boardId)));
 	}
 }

@@ -39,7 +39,8 @@ public class BoardRepositoryCustomImpl extends CustomQuerydslRepositorySupport
 			.createQuery()
 			.select(new QBoardDto(BOARD_ENTITY))
 			.from(BOARD_ENTITY)
-			.innerJoin(BOARD_ENTITY.contents);
+			.innerJoin(BOARD_ENTITY.contents)
+			.fetchJoin();
 	}
 
 	private void applyPaginationWhereClause(

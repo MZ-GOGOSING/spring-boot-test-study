@@ -53,7 +53,7 @@ public class BoardController {
 		return ApiResponseGenerator.success(PageResponse.convert(paginatedResult));
 	}
 
-	@ApiOperation("ID를 이용한 단건 조회")
+	@ApiOperation("특정 게시물 조회")
 	@GetMapping("/{boardId}")
 	public ApiResponse<BoardDto> getSandbox(final @PathVariable @Min(1) Long boardId) {
 		return ApiResponseGenerator.success(boardService.getBoard(boardId));
