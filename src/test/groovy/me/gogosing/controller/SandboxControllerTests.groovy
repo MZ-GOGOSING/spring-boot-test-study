@@ -24,6 +24,7 @@ import java.time.LocalDateTime
 
 import static me.gogosing.persistence.code.SandboxCategory.NORMAL
 import static org.apache.commons.lang3.math.NumberUtils.LONG_ONE
+import static org.springframework.data.domain.Sort.Order.asc
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
@@ -59,7 +60,7 @@ class SandboxControllerTests extends Specification {
             .build()
 
         def pageable = PageRequest
-            .of(0, 25, Sort.by(Sort.Order.asc("name")))
+            .of(0, 25, Sort.by(asc("name")))
 
         def sandBoxItem = SandboxItem.builder()
                 .id(1L)
@@ -73,11 +74,7 @@ class SandboxControllerTests extends Specification {
         def expectedResult = PageableExecutionUtils
                 .getPage(content, pageable, { -> (long) content.size() })
 
-        sandboxService.getPaginatedSandbox(condition, pageable) >> PageableExecutionUtils.getPage(
-                content,
-                pageable,
-                { -> (long) content.size() }
-        )
+        sandboxService.getPaginatedSandbox(condition, pageable) >> expectedResult
 
         def expectedJsonString = objectMapper.writeValueAsString(
                 ApiResponseGenerator.success(PageResponse.convert(expectedResult))
@@ -95,8 +92,6 @@ class SandboxControllerTests extends Specification {
         .andReturn()
         .getResponse()
         .getContentAsString()
-
-
 
         then:
         actualJsonString == expectedJsonString
