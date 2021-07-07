@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import spock.lang.Specification
 
 @QueryDslRepositoryTest
+@SuppressWarnings('NonAsciiCharacters')
 class SandboxRepositoryTests extends Specification {
 
     @Autowired

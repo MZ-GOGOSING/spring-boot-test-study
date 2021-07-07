@@ -32,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = [SandboxController])
 @Import(HttpEncodingAutoConfiguration)
+@SuppressWarnings('NonAsciiCharacters')
 class SandboxControllerTests extends Specification {
 
     @Autowired
