@@ -61,18 +61,17 @@ class SandboxControllerTests extends Specification {
         def pageable = PageRequest
             .of(0, 25, Sort.by(Sort.Order.asc("name")))
 
-        when:
         def sandBoxItem = SandboxItem.builder()
-            .id(1L)
-            .name("정진범")
-            .age(20)
-            .category(NORMAL)
-            .updateDate(LocalDateTime.now())
-            .build()
+                .id(1L)
+                .name("정진범")
+                .age(20)
+                .category(NORMAL)
+                .updateDate(LocalDateTime.now())
+                .build()
 
-        def content = Collections.singletonList(sandBoxItem);
+        def content = Collections.singletonList(sandBoxItem)
         def expectedResult = PageableExecutionUtils
-            .getPage(content, pageable, { -> (long) content.size() })
+                .getPage(content, pageable, { -> (long) content.size() })
 
         sandboxService.getPaginatedSandbox(condition, pageable) >> PageableExecutionUtils.getPage(
                 content,
@@ -80,11 +79,11 @@ class SandboxControllerTests extends Specification {
                 { -> (long) content.size() }
         )
 
-        then:
         def expectedJsonString = objectMapper.writeValueAsString(
-            ApiResponseGenerator.success(PageResponse.convert(expectedResult))
+                ApiResponseGenerator.success(PageResponse.convert(expectedResult))
         )
 
+        when:
         def actualJsonString = mockMvc.perform(
             get("/v1/sandbox")
                 .accept(APPLICATION_JSON_VALUE)
@@ -97,6 +96,9 @@ class SandboxControllerTests extends Specification {
         .getResponse()
         .getContentAsString()
 
+
+
+        then:
         actualJsonString == expectedJsonString
     }
 
@@ -104,7 +106,6 @@ class SandboxControllerTests extends Specification {
         given:
         def id = LONG_ONE
 
-        when:
         def expectedResult = SandboxDto.builder()
             .id(id)
             .name("정진범")
@@ -117,10 +118,10 @@ class SandboxControllerTests extends Specification {
 
         sandboxService.getSandbox(id) >> expectedResult
 
-        then:
         def expectedJsonString = objectMapper
             .writeValueAsString(ApiResponseGenerator.success(expectedResult))
 
+        when:
         def actualJsonString = mockMvc.perform(
             get("/v1/sandbox/{id}", id)
                 .accept(APPLICATION_JSON_VALUE)
@@ -131,6 +132,7 @@ class SandboxControllerTests extends Specification {
         .getResponse()
         .getContentAsString()
 
+        then:
         actualJsonString == expectedJsonString
     }
 }

@@ -108,7 +108,7 @@ public class BoardRepositoryTests {
 		// when
 		final var paginatedResult = boardRepository.findAllByCondition(condition, pageable);
 
-		//then
+		// then
 		assertThat(paginatedResult).isNotEmpty();
 		assertWith(paginatedResult, result -> {
 			assertThat(result.getTotalElements()).isNotZero();

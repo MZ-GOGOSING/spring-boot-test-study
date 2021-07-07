@@ -67,7 +67,6 @@ public class BoardControllerTests {
 		final var pageable = PageRequest
 			.of(0, 25, Sort.by(Order.asc("boardId")));
 
-		// when
 		final var boardItem = BoardItem.builder()
 			.boardId(1L)
 			.boardTitle("첫번째 테스트 제목")
@@ -78,16 +77,16 @@ public class BoardControllerTests {
 
 		final var content = Collections.singletonList(boardItem);
 		final var expectedResult = PageableExecutionUtils
-			.getPage(content, pageable, () -> (long) content.size());
+			.getPage(content, pageable, content::size);
 
 		when(boardService.getPaginatedBoard(condition, pageable))
 			.thenReturn(expectedResult);
 
-		// then
 		final var expectedJsonString = objectMapper.writeValueAsString(
 			ApiResponseGenerator.success(PageResponse.convert(expectedResult))
 		);
 
+		// when
 		final var actualJsonString = mockMvc.perform(
 			get("/v1/board")
 				.accept(APPLICATION_JSON_VALUE)
@@ -100,6 +99,7 @@ public class BoardControllerTests {
 		.getResponse()
 		.getContentAsString();
 
+		// then
 		assertThat(actualJsonString).isEqualTo(expectedJsonString);
 	}
 
@@ -109,7 +109,6 @@ public class BoardControllerTests {
 		// given
 		final var boardId = LONG_ONE;
 
-		// when
 		final var expectedResult = BoardDto.builder()
 			.boardId(boardId)
 			.boardTitle("첫번째 테스트 제목")
@@ -121,10 +120,10 @@ public class BoardControllerTests {
 		when(boardService.getBoard(boardId))
 			.thenReturn(expectedResult);
 
-		// then
 		final var expectedJsonString = objectMapper
 			.writeValueAsString(ApiResponseGenerator.success(expectedResult));
 
+		// when
 		final var actualJsonString = mockMvc.perform(
 			get("/v1/board/{boardId}", boardId)
 				.accept(APPLICATION_JSON_VALUE)
@@ -135,6 +134,7 @@ public class BoardControllerTests {
 		.getResponse()
 		.getContentAsString();
 
+		// then
 		assertThat(actualJsonString).isEqualTo(expectedJsonString);
 	}
 
@@ -155,7 +155,6 @@ public class BoardControllerTests {
 			.attachments(boardAttachmentSources)
 			.build();
 
-		// when
 		final var expectedAttachments = List.of(
 			BoardAttachmentDto.builder()
 				.boardAttachmentId(1L)
@@ -182,10 +181,10 @@ public class BoardControllerTests {
 		when(boardService.insertBoard(boardSource))
 			.thenReturn(expectedResult);
 
-		// then
 		final var expectedJsonString = objectMapper
 			.writeValueAsString(ApiResponseGenerator.success(expectedResult));
 
+		// when
 		final var actualJsonString = mockMvc.perform(
 			post("/v1/board")
 				.contentType(APPLICATION_JSON)
@@ -198,6 +197,7 @@ public class BoardControllerTests {
 		.getResponse()
 		.getContentAsString();
 
+		// then
 		assertThat(actualJsonString).isEqualTo(expectedJsonString);
 	}
 
@@ -220,7 +220,6 @@ public class BoardControllerTests {
 			.attachments(boardAttachmentSources)
 			.build();
 
-		// when
 		final var expectedAttachments = List.of(
 			BoardAttachmentDto.builder()
 				.boardAttachmentId(1L)
@@ -247,22 +246,23 @@ public class BoardControllerTests {
 		when(boardService.updateBoard(boardId, boardSource))
 			.thenReturn(expectedResult);
 
-		// then
 		final var expectedJsonString = objectMapper
 			.writeValueAsString(ApiResponseGenerator.success(expectedResult));
 
+		// when
 		final var actualJsonString = mockMvc.perform(
 			put("/v1/board/{boardId}", boardId)
 				.contentType(APPLICATION_JSON)
 				.accept(APPLICATION_JSON_VALUE)
 				.content(objectMapper.writeValueAsString(boardSource))
 		)
-			.andDo(print())
-			.andExpect(status().isOk())
-			.andReturn()
-			.getResponse()
-			.getContentAsString();
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andReturn()
+		.getResponse()
+		.getContentAsString();
 
+		// then
 		assertThat(actualJsonString).isEqualTo(expectedJsonString);
 	}
 
@@ -272,7 +272,6 @@ public class BoardControllerTests {
 		// given
 		final var boardId = LONG_ONE;
 
-		// when
 		final var expectedAttachments = List.of(
 			BoardAttachmentDto.builder()
 				.boardAttachmentId(1L)
@@ -299,20 +298,21 @@ public class BoardControllerTests {
 		when(boardService.deleteBoard(boardId))
 			.thenReturn(expectedResult);
 
-		// then
 		final var expectedJsonString = objectMapper
 			.writeValueAsString(ApiResponseGenerator.success(expectedResult));
 
+		// when
 		final var actualJsonString = mockMvc.perform(
 			delete("/v1/board/{boardId}", boardId)
 				.accept(APPLICATION_JSON_VALUE)
 		)
-			.andDo(print())
-			.andExpect(status().isOk())
-			.andReturn()
-			.getResponse()
-			.getContentAsString();
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andReturn()
+		.getResponse()
+		.getContentAsString();
 
+		// then
 		assertThat(actualJsonString).isEqualTo(expectedJsonString);
 	}
 }
