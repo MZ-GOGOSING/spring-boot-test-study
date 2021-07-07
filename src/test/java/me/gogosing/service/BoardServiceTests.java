@@ -20,7 +20,7 @@ import me.gogosing.persistence.entity.BoardEntity;
 import me.gogosing.persistence.repository.BoardRepository;
 import me.gogosing.service.dto.BoardItem;
 import me.gogosing.service.dto.BoardSource;
-import me.gogosing.service.helper.BoardEntityGenerateComponent;
+import me.gogosing.service.helper.BoardRelationshipMappingComponent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ public class BoardServiceTests {
 
 	@BeforeEach
 	public void init() {
-		boardService = new BoardService(new BoardEntityGenerateComponent(), boardRepository);
+		boardService = new BoardService(new BoardRelationshipMappingComponent(), boardRepository);
 	}
 
 	@Test

@@ -5,11 +5,12 @@ import static me.gogosing.support.query.QueryDslHelper.optionalWhen;
 import com.querydsl.jpa.JPQLQuery;
 import me.gogosing.persistence.CustomQuerydslRepositorySupport;
 import me.gogosing.persistence.dto.QSandboxDto;
-import me.gogosing.persistence.dto.SandboxDto;
 import me.gogosing.persistence.dto.SandboxCondition;
+import me.gogosing.persistence.dto.SandboxDto;
 import me.gogosing.persistence.entity.QSandboxEntity;
 import me.gogosing.persistence.entity.SandboxEntity;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 @SuppressWarnings("unused")
@@ -30,7 +31,11 @@ public class SandboxRepositoryCustomImpl extends CustomQuerydslRepositorySupport
 
 		applyPaginationWhereClause(query, condition);
 
-		return applyPagination(pageable, query);
+		final var queryResults = getQuerydsl()
+			.applyPagination(pageable, query)
+			.fetchResults();
+
+		return new PageImpl<>(queryResults.getResults(), pageable, queryResults.getTotal());
 	}
 
 	private JPQLQuery<SandboxDto> getPaginationDefaultQuery() {

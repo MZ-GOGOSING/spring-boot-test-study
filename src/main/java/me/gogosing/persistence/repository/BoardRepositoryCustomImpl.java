@@ -10,11 +10,11 @@ import me.gogosing.persistence.dto.QBoardDto;
 import me.gogosing.persistence.entity.BoardEntity;
 import me.gogosing.persistence.entity.QBoardEntity;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 @SuppressWarnings("unused")
-public class BoardRepositoryCustomImpl extends CustomQuerydslRepositorySupport
-	implements BoardRepositoryCustom {
+public class BoardRepositoryCustomImpl extends CustomQuerydslRepositorySupport implements BoardRepositoryCustom {
 
 	private static final QBoardEntity BOARD_ENTITY = QBoardEntity.boardEntity;
 
@@ -31,7 +31,11 @@ public class BoardRepositoryCustomImpl extends CustomQuerydslRepositorySupport
 
 		applyPaginationWhereClause(query, condition);
 
-		return applyPagination(pageable, query);
+		final var queryResults = getQuerydsl()
+			.applyPagination(pageable, query)
+			.fetchResults();
+
+		return new PageImpl<>(queryResults.getResults(), pageable, queryResults.getTotal());
 	}
 
 	private JPQLQuery<BoardDto> getPaginationDefaultQuery() {
