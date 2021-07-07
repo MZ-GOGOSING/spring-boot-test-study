@@ -1,12 +1,20 @@
 package me.gogosing.config;
 
 import static springfox.documentation.builders.RequestHandlerSelectors.any;
+import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
+import com.fasterxml.classmate.TypeResolver;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Arrays;
 import java.util.List;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -27,7 +35,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @Profile({"!prod"})
 @Configuration
 @EnableSwagger2WebMvc
+@RequiredArgsConstructor
 public class SwaggerConfig implements WebMvcConfigurer {
+
+  private final TypeResolver typeResolver;
 
   @Bean
   public Docket api() {
@@ -60,6 +71,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
     );
 
     return new Docket(DocumentationType.SWAGGER_2)
+        .alternateTypeRules(newRule(typeResolver.resolve(Pageable.class), typeResolver.resolve(Page.class)))
         .apiInfo(apiInfo())
         .globalOperationParameters(globalOperationParameters)
         .globalResponseMessage(RequestMethod.GET, responseMessageList)
@@ -88,5 +100,19 @@ public class SwaggerConfig implements WebMvcConfigurer {
         .contact(new Contact("메가존", "https://mz.co.kr", "gogosing@mz.co.kr"))
         .version("1.0")
         .build();
+  }
+
+  @Getter
+  @Setter
+  @ApiModel
+  static class Page {
+    @ApiModelProperty(value = "페이지 번호(0..N)")
+    private Integer page;
+
+    @ApiModelProperty(value = "페이지 크기")
+    private Integer size;
+
+    @ApiModelProperty(value = "정렬(사용법: 컬럼명,ASC|DESC)")
+    private List<String> sort;
   }
 }
