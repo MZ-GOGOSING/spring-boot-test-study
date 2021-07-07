@@ -2,6 +2,7 @@ package me.gogosing.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +56,10 @@ public class BoardController {
 
 	@ApiOperation("특정 게시물 조회")
 	@GetMapping("/{boardId}")
-	public ApiResponse<BoardDto> getSandbox(final @PathVariable @Min(1) Long boardId) {
+	public ApiResponse<BoardDto> getSandbox(
+		@ApiParam(value = "게시물 ID", required = true)
+		final @PathVariable @Min(1) Long boardId
+	) {
 		return ApiResponseGenerator.success(boardService.getBoard(boardId));
 	}
 
@@ -68,6 +72,7 @@ public class BoardController {
 	@ApiOperation("특정 게시물 수정")
 	@PutMapping("/{boardId}")
 	public ApiResponse<BoardDto> putBoard(
+		@ApiParam(value = "게시물 ID", required = true)
 		final @PathVariable @Min(1) Long boardId,
 		final @RequestBody @Valid BoardSource source
 	) {
@@ -76,7 +81,10 @@ public class BoardController {
 
 	@ApiOperation("특정 게시물 삭제")
 	@DeleteMapping("/{boardId}")
-	public ApiResponse<BoardDto> deleteBoard(final @PathVariable @Min(1) Long boardId) {
+	public ApiResponse<BoardDto> deleteBoard(
+		@ApiParam(value = "게시물 ID", required = true)
+		final @PathVariable @Min(1) Long boardId
+	) {
 		return ApiResponseGenerator.success(boardService.deleteBoard(boardId));
 	}
 }

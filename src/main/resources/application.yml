@@ -48,3 +48,4 @@ logging:
     web: DEBUG
     org.springframework.orm.jpa: DEBUG
     org.springframework.transaction: DEBUG
+    io.swagger.models.parameters.AbstractSerializableParameter: error

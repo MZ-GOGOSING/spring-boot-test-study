@@ -38,6 +38,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     compileOnly 'net.logstash.logback:logstash-logback-encoder:6.1'
 
+    compileOnly 'io.springfox:springfox-spring-webmvc:2.10.0'
     compileOnly 'io.springfox:springfox-swagger-ui:2.10.0'
     compileOnly 'io.springfox:springfox-swagger2:2.10.0'
 

@@ -12,12 +12,13 @@ import me.gogosing.service.dto.BoardSource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BoardRelationshipMappingComponent {
+public class BoardEntityRelationshipMappingComponent {
 
 	public BoardEntity buildForInsert(final BoardSource boardSource) {
 		final var boardEntity = buildBoardEntity(boardSource);
 		final var boardContentsEntity = buildBoardContentsEntity(boardEntity, boardSource.getBoardContents());
-		final var boardAttachmentEntities = buildBoardAttachmentEntities(boardEntity, boardSource.getAttachments());
+		final var boardAttachmentEntities =
+			buildBoardAttachmentEntities(boardEntity, boardSource.getAttachments());
 
 		boardEntity.setContents(boardContentsEntity);
 		boardEntity.setAttachments(boardAttachmentEntities);
@@ -26,7 +27,8 @@ public class BoardRelationshipMappingComponent {
 	}
 
 	public BoardEntity buildForUpdate(final BoardEntity boardEntity, final BoardSource boardSource) {
-		final var boardAttachmentEntities = buildBoardAttachmentEntities(boardEntity, boardSource.getAttachments());
+		final var boardAttachmentEntities =
+			buildBoardAttachmentEntities(boardEntity, boardSource.getAttachments());
 
 		boardEntity.setBoardTitle(boardSource.getBoardTitle());
 		boardEntity.setBoardUseYn(boardSource.getBoardUseYn());

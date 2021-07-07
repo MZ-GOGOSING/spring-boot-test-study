@@ -2,6 +2,7 @@ package me.gogosing.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,9 +48,12 @@ public class SandboxController {
 		return ApiResponseGenerator.success(PageResponse.convert(paginatedResult));
 	}
 
-	@ApiOperation("ID를 이용한 단건 조회")
+	@ApiOperation("특정 게시물 조회")
 	@GetMapping("/{id}")
-	public ApiResponse<SandboxDto> getSandbox(final @PathVariable @Min(1) Long id) {
+	public ApiResponse<SandboxDto> getSandbox(
+		@ApiParam(value = "게시물 ID", required = true)
+		final @PathVariable @Min(1) Long id
+	) {
 		return ApiResponseGenerator.success(sandboxService.getSandbox(id));
 	}
 }
