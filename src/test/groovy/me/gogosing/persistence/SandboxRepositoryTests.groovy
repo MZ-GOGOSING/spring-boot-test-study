@@ -1,6 +1,5 @@
 package me.gogosing.persistence
 
-
 import me.gogosing.persistence.repository.SandboxRepository
 import me.gogosing.support.QueryDslRepositoryTest
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,7 +9,7 @@ import spock.lang.Specification
 class SandboxRepositoryTests extends Specification {
 
     @Autowired
-    private SandboxRepository sandboxRepository;
+    SandboxRepository sandboxRepository
 
     def "ID를 통한 단건 조회 테스트"() {
         given:

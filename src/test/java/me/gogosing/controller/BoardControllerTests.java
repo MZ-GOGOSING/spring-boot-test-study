@@ -5,8 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -195,6 +197,121 @@ public class BoardControllerTests {
 		.andReturn()
 		.getResponse()
 		.getContentAsString();
+
+		assertThat(actualJsonString).isEqualTo(expectedJsonString);
+	}
+
+	@Test
+	@DisplayName("특정 게시물 수정 테스트")
+	public void testPutSandbox() throws Exception {
+		// given
+		final var boardId = LONG_ONE;
+
+		final var boardAttachmentSources = List.of(
+			BoardAttachmentSource.builder()
+				.boardAttachmentPath("/foo/bar/")
+				.boardAttachmentName("sample1.png")
+				.build());
+
+		final var boardSource = BoardSource.builder()
+			.boardTitle("첫번째 테스트 제목 수정")
+			.boardUseYn(true)
+			.boardContents("첫번째 테스트 내용 수정")
+			.attachments(boardAttachmentSources)
+			.build();
+
+		// when
+		final var expectedAttachments = List.of(
+			BoardAttachmentDto.builder()
+				.boardAttachmentId(1L)
+				.boardId(1L)
+				.boardAttachmentPath("/foo/bar/")
+				.boardAttachmentName("sample1.png")
+				.build());
+
+		final var expectedContents = BoardContentsDto.builder()
+			.boardId(LONG_ONE)
+			.boardContents("첫번째 테스트 내용 수정")
+			.build();
+
+		final var expectedResult = BoardDto.builder()
+			.boardId(LONG_ONE)
+			.boardTitle("첫번째 테스트 제목 수정")
+			.boardUseYn(true)
+			.contents(expectedContents)
+			.attachments(expectedAttachments)
+			.createDate(LocalDateTime.now())
+			.updateDate(LocalDateTime.now())
+			.build();
+
+		when(boardService.updateBoard(boardId, boardSource))
+			.thenReturn(expectedResult);
+
+		// then
+		final var expectedJsonString = objectMapper
+			.writeValueAsString(ApiResponseGenerator.success(expectedResult));
+
+		final var actualJsonString = mockMvc.perform(
+			put("/v1/board/{boardId}", boardId)
+				.contentType(APPLICATION_JSON)
+				.accept(APPLICATION_JSON_VALUE)
+				.content(objectMapper.writeValueAsString(boardSource))
+		)
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andReturn()
+			.getResponse()
+			.getContentAsString();
+
+		assertThat(actualJsonString).isEqualTo(expectedJsonString);
+	}
+
+	@Test
+	@DisplayName("특정 게시물 삭제 테스트")
+	public void testDeleteSandbox() throws Exception {
+		// given
+		final var boardId = LONG_ONE;
+
+		// when
+		final var expectedAttachments = List.of(
+			BoardAttachmentDto.builder()
+				.boardAttachmentId(1L)
+				.boardId(1L)
+				.boardAttachmentPath("/foo/bar/")
+				.boardAttachmentName("sample.png")
+				.build());
+
+		final var expectedContents = BoardContentsDto.builder()
+			.boardId(LONG_ONE)
+			.boardContents("첫번째 테스트 내용")
+			.build();
+
+		final var expectedResult = BoardDto.builder()
+			.boardId(LONG_ONE)
+			.boardTitle("첫번째 테스트 제목")
+			.boardUseYn(true)
+			.contents(expectedContents)
+			.attachments(expectedAttachments)
+			.createDate(LocalDateTime.now())
+			.updateDate(LocalDateTime.now())
+			.build();
+
+		when(boardService.deleteBoard(boardId))
+			.thenReturn(expectedResult);
+
+		// then
+		final var expectedJsonString = objectMapper
+			.writeValueAsString(ApiResponseGenerator.success(expectedResult));
+
+		final var actualJsonString = mockMvc.perform(
+			delete("/v1/board/{boardId}", boardId)
+				.accept(APPLICATION_JSON_VALUE)
+		)
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andReturn()
+			.getResponse()
+			.getContentAsString();
 
 		assertThat(actualJsonString).isEqualTo(expectedJsonString);
 	}
