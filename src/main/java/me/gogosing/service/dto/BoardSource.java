@@ -39,6 +39,7 @@ public class BoardSource {
 	private String boardContents;
 
 	@Size(max = 3)
+	@Builder.Default
 	@ApiModelProperty("첨부파일 목록")
 	private List<BoardAttachmentSource> attachments = Collections.emptyList();
 }
