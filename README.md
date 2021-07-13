@@ -50,5 +50,5 @@
 * 본 어플리케이션을 Git Clone 하고 분석하는 개발자를 위하여 고의적으로 아래의 Class 에 대한 Test Case 는 작성하지 않았습니다.
 * 아래의 클래스에 대한 실제 Test Case 를 작성해 보며 분석한 결과를 재확인 해 볼 수 있도록 하였습니다.
     * [SandboxService.java](src/main/java/me/gogosing/service/SandboxService.java)
-* 해당 글을 작성하는 2021.07.13 기준, 본 어플리케이션에 대한 Coverage 는  
+* 해당 글을 작성하는 2021.07.13 기준으로 본 어플리케이션에 대한 Coverage 는 약 60% 이다.
 
