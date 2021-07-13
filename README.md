@@ -26,12 +26,12 @@
 ## 특이사항
 * 본 어플리케이션의 웹 접근을 위한 port 는 9090 으로 설정되어 있습니다.
 * 본 어플리케이션을 로컬상에서 구동하기 위해 별도의 RDBMS, Docker Container 설치는 불필요합니다.
-* 본 어플리케이션 구동 시, h2 Database 를 In Memory 모드로 사용하도록 설정해 두었습니다.
-    * [H2 Web Console](http://localhost:9090/h2-console)
-    * Web Console ID / PW 는 접근 시, 지정되어 있는 상태 그대로 Connect 할 수 있습니다.
+* 본 어플리케이션 구동 시, h2 Database 를 In Memory Mode 로 사용하도록 설정해 두었습니다.
+    * H2 Web Console 은 다음과 같이 [http://localhost:9090/h2-console](http://localhost:9090/h2-console) 접근할 수 있습니다.
+    * H2 Web Console 접근 시, ID / PW 는 지정되어 있는 상태 그대로 Connect 할 수 있습니다.
     * In Memory Mode 이기에, 어플리케이션이 종료되면 기 반영되어 있던 Schema / init Data 정보는 모두 소거됩니다.
 * 본 어플리케이션 구동 시, flyway 를 통하여 DB에 Schema / init Data 가 반영될 수 있도록 설정해 두었습니다.
-* Swagger REST API 명세는 [링크](http://localhost:9090/swagger-ui.html) 로 접근이 가능합니다.
+* Swagger REST API 명세는 [http://localhost:9090/swagger-ui.html](http://localhost:9090/swagger-ui.html) 로 접근이 가능합니다.
     
 ## 사용된 의존성
 본 어플리케이션을 작성하기 위해서 대표적으로 아래와 같은 의존성이 사용되었습니다.
@@ -47,8 +47,8 @@
 * h2database (in memory)
 
 ## 본 어플리케이션에 관심을 가지는 개발자에게
-* 본 어플리케이션을 Git Clone 하고 분석하는 개발자를 위하여 고의적으로 아래의 Class 에 대한 Test Case 는 작성하지 않았습니다.
+* 본 어플리케이션을 Git Clone 하고 분석하는 개발자를 위해 아래의 Class 에 대한 Test Case 는 작성하지 않고 남겨두었습니다.
 * 아래의 클래스에 대한 실제 Test Case 를 작성해 보며 분석한 결과를 재확인 해 볼 수 있도록 하였습니다.
     * [SandboxService.java](src/main/java/me/gogosing/service/SandboxService.java)
-* 해당 글을 작성하는 2021.07.13 기준으로 본 어플리케이션에 대한 Coverage 는 약 60% 이다.
+* 해당 글을 작성하는 2021.07.13 기준으로 본 어플리케이션에 대한 Coverage 는 약 60% 입니다.
 
