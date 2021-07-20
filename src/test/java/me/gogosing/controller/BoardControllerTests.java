@@ -28,7 +28,6 @@ import me.gogosing.support.dto.ApiResponseGenerator;
 import me.gogosing.support.page.PageResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -38,10 +37,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.support.PageableExecutionUtils;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-@ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = BoardController.class)
 @Import(HttpEncodingAutoConfiguration.class)
 @DisplayName("BoardController Tests")
