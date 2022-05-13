@@ -1,7 +1,6 @@
 package me.gogosing.service.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Collections;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
@@ -22,24 +21,23 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(description = "게시물 등록/수정 모델")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class BoardSource {
 
 	@NotBlank
-	@ApiModelProperty("제목")
+	@Schema(description = "제목")
 	private String boardTitle;
 
 	@NotNull
-	@ApiModelProperty("사용여부")
+	@Schema(description = "사용여부")
 	private Boolean boardUseYn;
 
 	@NotBlank
-	@ApiModelProperty("내용")
+	@Schema(description = "내용")
 	private String boardContents;
 
 	@Size(max = 3)
 	@Builder.Default
-	@ApiModelProperty("첨부파일 목록")
+	@Schema(description = "첨부파일 목록")
 	private List<BoardAttachmentSource> attachments = Collections.emptyList();
 }

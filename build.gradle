@@ -38,9 +38,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     compileOnly 'net.logstash.logback:logstash-logback-encoder:6.1'
 
-    compileOnly 'io.springfox:springfox-spring-webmvc:2.10.0'
-    compileOnly 'io.springfox:springfox-swagger-ui:2.10.0'
-    compileOnly 'io.springfox:springfox-swagger2:2.10.0'
+    compileOnly 'org.springdoc:springdoc-openapi-ui:1.6.8'
+    compileOnly 'org.springdoc:springdoc-openapi-webmvc-core:1.6.8'
 
     runtimeOnly 'com.h2database:h2'
 
@@ -65,7 +64,6 @@ dependencies {
     testRuntimeOnly ('org.junit.vintage:junit-vintage-engine') {
         because 'JUni 3 와 JUnit 4 테스트 실행을 위해 필요핟.'
     }
-    testRuntimeOnly 'io.springfox:springfox-swagger2:2.10.0'
     testRuntimeOnly 'com.h2database:h2'
 }
 

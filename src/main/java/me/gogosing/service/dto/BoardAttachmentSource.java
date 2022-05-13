@@ -1,7 +1,6 @@
 package me.gogosing.service.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +17,6 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(description = "게시물 첨부파일 모델")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class BoardAttachmentSource {
 
@@ -27,7 +25,7 @@ public class BoardAttachmentSource {
 	 */
 	@NotBlank
 	@EqualsAndHashCode.Include
-	@ApiModelProperty("첨부파일 경로")
+	@Schema(description = "첨부파일 경로")
 	private String boardAttachmentPath;
 
 	/**
@@ -35,6 +33,6 @@ public class BoardAttachmentSource {
 	 */
 	@NotBlank
 	@EqualsAndHashCode.Include
-	@ApiModelProperty("첨부파일 이름")
+	@Schema(description = "첨부파일 이름")
 	private String boardAttachmentName;
 }
