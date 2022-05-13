@@ -12,6 +12,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  * 기간 필터링 조건 모델.
@@ -26,6 +28,7 @@ public class FilterLocalDateRange implements Serializable {
    * 필터링 적용 시작일.
    */
   @JsonProperty(value = "startDate")
+  @DateTimeFormat(iso = ISO.DATE)
   @Schema(description = "검색 시작일")
   private LocalDate startDate;
 
@@ -33,6 +36,7 @@ public class FilterLocalDateRange implements Serializable {
    * 필터링 적용 종료일.
    */
   @JsonProperty(value = "endDate")
+  @DateTimeFormat(iso = ISO.DATE)
   @Schema(description = "검색 종료일")
   private LocalDate endDate;
 

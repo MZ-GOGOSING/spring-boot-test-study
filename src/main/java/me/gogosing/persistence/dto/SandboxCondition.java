@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.gogosing.persistence.code.SandboxCategory;
 import me.gogosing.support.dto.filter.FilterNumericRange;
+import org.springdoc.api.annotations.ParameterObject;
 
 /**
  * 데이터 필터.
@@ -17,6 +18,7 @@ import me.gogosing.support.dto.filter.FilterNumericRange;
 @Getter
 @Setter
 @Builder
+@ParameterObject
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)

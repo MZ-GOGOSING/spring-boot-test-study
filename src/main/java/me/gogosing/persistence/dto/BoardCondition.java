@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.gogosing.support.dto.filter.FilterLocalDateRange;
+import org.springdoc.api.annotations.ParameterObject;
 
 /**
  * 게시물 필터.
@@ -15,6 +16,7 @@ import me.gogosing.support.dto.filter.FilterLocalDateRange;
 @Getter
 @Setter
 @Builder
+@ParameterObject
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
