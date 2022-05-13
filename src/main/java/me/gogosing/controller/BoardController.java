@@ -1,8 +1,8 @@
 package me.gogosing.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(value = "게시물 관리 샘플 API", tags = "[샘플] BOARD")
+@Tag(name = "BoardController", description = "게시물 관리 샘플 API")
 @Slf4j
 @Validated
 @RestController
@@ -38,7 +38,7 @@ public class BoardController {
 
 	private final BoardService boardService;
 
-	@ApiOperation("페이징 처리된 목록 조회")
+	@Operation(summary = "페이징 처리된 목록 조회", description = "페이징 처리된 사용자 목록을 조회할 수 있습니다.")
 	@GetMapping
 	public ApiResponse<PageResponse<BoardItem>> getPaginatedItem(
 		final BoardCondition condition,
@@ -54,35 +54,35 @@ public class BoardController {
 		return ApiResponseGenerator.success(PageResponse.convert(paginatedResult));
 	}
 
-	@ApiOperation("특정 게시물 조회")
+	@Operation(summary = "특정 게시물 조회")
 	@GetMapping("/{boardId}")
 	public ApiResponse<BoardDto> getSandbox(
-		@ApiParam(value = "게시물 ID", required = true)
+		@Parameter(description = "게시물 ID", required = true)
 		final @PathVariable @Min(1) Long boardId
 	) {
 		return ApiResponseGenerator.success(boardService.getBoard(boardId));
 	}
 
-	@ApiOperation("특정 게시물 생성")
+	@Operation(summary = "특정 게시물 생성")
 	@PostMapping
 	public ApiResponse<BoardDto> postBoard(final @RequestBody @Valid BoardSource source) {
 		return ApiResponseGenerator.success(boardService.insertBoard(source));
 	}
 
-	@ApiOperation("특정 게시물 수정")
+	@Operation(summary = "특정 게시물 수정")
 	@PutMapping("/{boardId}")
 	public ApiResponse<BoardDto> putBoard(
-		@ApiParam(value = "게시물 ID", required = true)
+		@Parameter(description = "게시물 ID", required = true)
 		final @PathVariable @Min(1) Long boardId,
 		final @RequestBody @Valid BoardSource source
 	) {
 		return ApiResponseGenerator.success(boardService.updateBoard(boardId, source));
 	}
 
-	@ApiOperation("특정 게시물 삭제")
+	@Operation(summary = "특정 게시물 삭제")
 	@DeleteMapping("/{boardId}")
 	public ApiResponse<BoardDto> deleteBoard(
-		@ApiParam(value = "게시물 ID", required = true)
+		@Parameter(description = "게시물 ID", required = true)
 		final @PathVariable @Min(1) Long boardId
 	) {
 		return ApiResponseGenerator.success(boardService.deleteBoard(boardId));
