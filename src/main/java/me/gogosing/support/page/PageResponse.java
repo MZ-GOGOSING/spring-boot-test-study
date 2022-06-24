@@ -1,5 +1,6 @@
 package me.gogosing.support.page;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,20 +15,26 @@ import lombok.ToString;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+@Schema(description = "페이징 응답 정보")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class PageResponse<T> {
 
+  @Schema(description = "페이지 당 게시물 수")
   private int pageSize;
 
+  @Schema(description = "현재 페이지 번호")
   private int pageNumber;
 
+  @Schema(description = "존재하는 총 페이지 수")
   private int totalPageNumber;
 
+  @Schema(description = "존재하는 총 데이터 수")
   private Long totalSize;
 
+  @Schema(description = "현재 페이지 데이터 목록")
   private List<T> list;
 
   public PageResponse(int pageSize, int pageNumber, int totalPageNumber, Long totalSize,

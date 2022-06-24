@@ -1,21 +1,26 @@
 package me.gogosing.support.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import me.gogosing.support.code.ErrorCode;
 
+@Schema(description = "API 응답 정보")
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
 public class ApiResponse<T> {
 
+    @Schema(description = "응답 코드")
     private String code;
 
+    @Schema(description = "응답 메시지")
     private String message;
 
+    @Schema(description = "응답 데이터")
     private T data;
 
     ApiResponse(ErrorCode errorCode) {

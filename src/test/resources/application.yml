@@ -31,6 +31,10 @@ spring:
   flyway:
     enabled: false
 
+springdoc:
+  swagger-ui:
+    enabled: false
+
 logging:
   level:
     org.springframework: INFO

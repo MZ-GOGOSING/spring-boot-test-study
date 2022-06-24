@@ -1,6 +1,7 @@
 package me.gogosing.persistence.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -10,46 +11,33 @@ import lombok.Setter;
 import me.gogosing.persistence.code.SandboxCategory;
 import me.gogosing.persistence.entity.SandboxEntity;
 
+@Schema(description = "특정 게시물 정보 응답 모델")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class SandboxDto {
 
-	/**
-	 * 식별자.
-	 */
+	@Schema(description = "식별자", example = "1", required = true)
 	@EqualsAndHashCode.Include
 	private Long id;
 
-	/**
-	 * 이름.
-	 */
+	@Schema(description = "이름", example = "이름", required = true)
 	private String name;
 
-	/**
-	 * 나이.
-	 */
+	@Schema(description = "나이", example = "19", required = true)
 	private Integer age;
 
-	/**
-	 * 유형.
-	 */
+	@Schema(description = "유형", example = "NORMAL", required = true)
 	private SandboxCategory category;
 
-	/**
-	 * 삭제여부.
-	 */
+	@Schema(description = "삭제여부", example = "false", required = true)
 	private Boolean deleted;
 
-	/**
-	 * 생성일.
-	 */
+	@Schema(description = "생성일", example = "yyyy-MM-dd", required = true)
 	private LocalDateTime createDate;
 
-	/**
-	 * 최종 수정일.
-	 */
+	@Schema(description = "수정일", example = "yyyy-MM-dd", required = true)
 	private LocalDateTime updateDate;
 
 

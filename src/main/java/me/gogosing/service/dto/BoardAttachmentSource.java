@@ -12,6 +12,7 @@ import lombok.Setter;
 /**
  * 게시물 첨부파일 등록 DTO.
  */
+@Schema(description = "게시물 첨부파일 등록 모델")
 @Getter
 @Setter
 @Builder
@@ -25,7 +26,7 @@ public class BoardAttachmentSource {
 	 */
 	@NotBlank
 	@EqualsAndHashCode.Include
-	@Schema(description = "첨부파일 경로")
+	@Schema(description = "경로", example = "https://host.com/foo/bar/", required = true)
 	private String boardAttachmentPath;
 
 	/**
@@ -33,6 +34,6 @@ public class BoardAttachmentSource {
 	 */
 	@NotBlank
 	@EqualsAndHashCode.Include
-	@Schema(description = "첨부파일 이름")
+	@Schema(description = "파일명", example = "image.png", required = true)
 	private String boardAttachmentName;
 }
