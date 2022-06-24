@@ -5,6 +5,7 @@ import static java.util.Collections.emptySet;
 import static org.apache.commons.lang3.math.NumberUtils.LONG_ONE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertWith;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -152,8 +153,7 @@ public class BoardServiceTests {
 		boardEntity.setContents(boardContentsEntity);
 		boardEntity.setAttachments(emptySet());
 
-		when(boardRepository.save(boardEntity))
-			.thenReturn(boardEntity);
+		when(boardRepository.save(any())).thenReturn(boardEntity);
 
 		final var expectedResult = BoardDto
 			.withContentsAndAttachments(boardEntity);
@@ -170,7 +170,7 @@ public class BoardServiceTests {
 	}
 
 	@Test
-	@DisplayName("특정 게시물 생성 테스트")
+	@DisplayName("특정 게시물 수정 테스트")
 	public void testUpdateBoard() {
 		// given
 		final var boardId = LONG_ONE;
@@ -197,16 +197,12 @@ public class BoardServiceTests {
 		boardEntity.setContents(boardContentsEntity);
 		boardEntity.setAttachments(emptySet());
 
-		final var storedEntity = Optional.of(boardEntity);
+		when(boardRepository.findByBoardId(boardId)).thenReturn(Optional.of(boardEntity));
 
-		when(boardRepository.findByBoardId(boardId))
-			.thenReturn(storedEntity);
-
-		when(boardRepository.save(storedEntity.get()))
-			.thenReturn(storedEntity.get());
+		when(boardRepository.save(any())).thenReturn(boardEntity);
 
 		final var expectedResult = BoardDto
-			.withContentsAndAttachments(storedEntity.get());
+			.withContentsAndAttachments(boardEntity);
 
 		// when
 		final var actualResult = boardService.updateBoard(boardId, boardSource);

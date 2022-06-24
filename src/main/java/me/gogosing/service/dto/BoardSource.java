@@ -16,6 +16,7 @@ import lombok.Setter;
 /**
  * 게시물 등록 DTO.
  */
+@Schema(description = "게시물 등록/수정 모델")
 @Getter
 @Setter
 @Builder
@@ -25,15 +26,15 @@ import lombok.Setter;
 public class BoardSource {
 
 	@NotBlank
-	@Schema(description = "제목")
+	@Schema(description = "제목", example = "게시물 제목", required = true)
 	private String boardTitle;
 
 	@NotNull
-	@Schema(description = "사용여부")
+	@Schema(description = "사용여부", example = "true", required = true)
 	private Boolean boardUseYn;
 
 	@NotBlank
-	@Schema(description = "내용")
+	@Schema(description = "내용", example = "게시물 내용", required = true)
 	private String boardContents;
 
 	@Size(max = 3)

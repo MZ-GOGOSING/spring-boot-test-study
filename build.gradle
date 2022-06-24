@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.1'
+    id 'org.springframework.boot' version '2.7.0'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
     id 'idea'
@@ -22,13 +22,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-undertow'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.apache.commons:commons-lang3:3.7'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.hibernate:hibernate-spatial'
     implementation 'org.hibernate:hibernate-envers'
     implementation 'com.querydsl:querydsl-jpa'
     implementation 'com.querydsl:querydsl-apt'
+
+    implementation 'org.apache.commons:commons-lang3:3.7'
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
 
     compileOnly 'com.fasterxml.jackson.core:jackson-databind'
     compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
@@ -36,7 +38,6 @@ dependencies {
 
     compileOnly 'org.flywaydb:flyway-core'
     compileOnly 'org.projectlombok:lombok'
-    compileOnly 'net.logstash.logback:logstash-logback-encoder:6.1'
 
     compileOnly 'org.springdoc:springdoc-openapi-ui:1.6.8'
     compileOnly 'org.springdoc:springdoc-openapi-webmvc-core:1.6.8'
@@ -61,6 +62,8 @@ dependencies {
     testImplementation 'org.spockframework:spock-spring:2.0-groovy-3.0'
 
     testCompileOnly 'junit:junit'
+    testCompileOnly 'org.springdoc:springdoc-openapi-ui:1.6.8'
+    testCompileOnly 'org.springdoc:springdoc-openapi-webmvc-core:1.6.8'
     testRuntimeOnly ('org.junit.vintage:junit-vintage-engine') {
         because 'JUni 3 와 JUnit 4 테스트 실행을 위해 필요핟.'
     }

@@ -1,5 +1,6 @@
 package me.gogosing.service.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -12,36 +13,27 @@ import me.gogosing.persistence.dto.SandboxDto;
 /**
  * 데이터 항목.
  */
+@Schema(description = "게시판 항목 정보 응답 모델")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class SandboxItem {
 
-	/**
-	 * 식별자.
-	 */
+	@Schema(description = "식별자", example = "1", required = true)
 	@EqualsAndHashCode.Include
 	private Long id;
 
-	/**
-	 * 이름.
-	 */
+	@Schema(description = "이름", example = "이름", required = true)
 	private String name;
 
-	/**
-	 * 나이.
-	 */
+	@Schema(description = "나이", example = "19", required = true)
 	private Integer age;
 
-	/**
-	 * 유형.
-	 */
+	@Schema(description = "유형", example = "NORMAL", required = true)
 	private SandboxCategory category;
 
-	/**
-	 * 최종 수정일.
-	 */
+	@Schema(description = "수정일", example = "yyyy-MM-dd", required = true)
 	private LocalDateTime updateDate;
 
 

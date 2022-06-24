@@ -1,6 +1,7 @@
 package me.gogosing.persistence.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,46 +12,33 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.gogosing.persistence.entity.BoardEntity;
 
+@Schema(description = "특정 게시물 정보 응답 모델")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class BoardDto {
 
-	/**
-	 * 일련번호.
-	 */
+	@Schema(description = "식별자", example = "1", required = true)
 	@EqualsAndHashCode.Include
 	private Long boardId;
 
-	/**
-	 * 제목.
-	 */
+	@Schema(description = "제목", example = "게시물 제목", required = true)
 	private String boardTitle;
 
-	/**
-	 * 사용여부.
-	 */
+	@Schema(description = "사용여부", example = "true", required = true)
 	private Boolean boardUseYn;
 
-	/**
-	 * 등록일시.
-	 */
+	@Schema(description = "생성일", example = "yyyy-MM-dd", required = true)
 	private LocalDateTime createDate;
 
-	/**
-	 * 수정일시.
-	 */
+	@Schema(description = "수정일", example = "yyyy-MM-dd", required = true)
 	private LocalDateTime updateDate;
 
-	/**
-	 * 게시물 컨텐츠.
-	 */
+	@Schema(description = "내용", example = "게시물 내용", required = true)
 	private BoardContentsDto contents;
 
-	/**
-	 * 게시물 첨부파일 목록.
-	 */
+	@Schema(description = "첨부파일 목록")
 	private List<BoardAttachmentDto> attachments;
 
 

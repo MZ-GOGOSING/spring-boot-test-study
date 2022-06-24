@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +19,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity(name = "board_contents")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class BoardContentsEntity extends BaseEntity {
 
 	/**

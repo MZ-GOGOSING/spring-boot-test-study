@@ -21,7 +21,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity(name = "board_attachment")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class BoardAttachmentEntity extends BaseEntity {
 
 	/**

@@ -1,7 +1,6 @@
 package me.gogosing.persistence.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -39,7 +38,6 @@ public class SandboxCondition {
 	/**
 	 * 유형.
 	 */
-	@NotNull
 	@Schema(description = "카테고리")
 	private SandboxCategory category;
 }

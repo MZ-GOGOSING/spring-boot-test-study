@@ -1,10 +1,10 @@
 /* SANDBOX 샘플 데이터 */
-INSERT INTO sandbox (name, age, category) VALUES ('김지헌', 30, 'ADULT');
-INSERT INTO sandbox (name, age, category) VALUES ('노수진', 29, 'ADULT');
-INSERT INTO sandbox (name, age, category) VALUES ('조범진', 28, 'ADULT');
-INSERT INTO sandbox (name, age, category) VALUES ('김양현', 19, 'ADULT');
-INSERT INTO sandbox (name, age, category) VALUES ('박인수', 18, 'NORMAL');
-INSERT INTO sandbox (name, age, category, deleted) VALUES ('정진범', 17, 'NORMAL', true);
+INSERT INTO sandbox (id, name, age, category) VALUES (1, '김지헌', 30, 'ADULT');
+INSERT INTO sandbox (id, name, age, category) VALUES (2, '노수진', 29, 'ADULT');
+INSERT INTO sandbox (id, name, age, category) VALUES (3, '조범진', 28, 'ADULT');
+INSERT INTO sandbox (id, name, age, category) VALUES (4, '김양현', 19, 'ADULT');
+INSERT INTO sandbox (id, name, age, category) VALUES (5, '박인수', 18, 'NORMAL');
+INSERT INTO sandbox (id, name, age, category, deleted) VALUES (6, '정진범', 17, 'NORMAL', true);
 
 /* 게시물 샘플 데이터 */
 INSERT INTO board (board_id, board_title, board_use_yn, create_date, update_date)
